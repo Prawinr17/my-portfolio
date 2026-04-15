@@ -20,4 +20,4 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://praveenr.vercel.app/sitemap.xml
+Sitemap: https://praveen-r-portfolio.vercel.app/sitemap.xml
