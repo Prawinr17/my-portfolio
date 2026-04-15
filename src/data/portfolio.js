@@ -182,5 +182,5 @@ export const contactInfo = {
   phone: "7550121102",
   location: "Bengaluru, India",
   linkedin: "https://linkedin.com/in/praveen-r-20536324b/",
-  github: "https://github.com/praveen-r",
+  github: "https://github.com/Prawinpinto",
 };

@@ -123,7 +123,7 @@ function buildResponse(input) {
 
   // GitHub profile
   if (has("github", "git profile", "repository", "repo", "your code", "source code")) {
-    return "🐙 GitHub Profile:\n\ngithub.com/praveen-r\n\nReal production-grade code — not just tutorial projects! 💻⚡\n\nYou can also find the link in the Contact section below. 👇";
+    return "🐙 GitHub Profile:\n\ngithub.com/Prawinpinto\n\nReal production-grade code — not just tutorial projects! 💻⚡\n\nYou can also find the link in the Contact section below. 👇";
   }
 
   // Skills — specific tech
