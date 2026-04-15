@@ -78,7 +78,7 @@ export default function Experience() {
           >
             {/* Academy bg image */}
             <motion.img
-              src="/Ninjaschool.png"
+              src="/Hokageofc.png"
               alt="Ninja Academy"
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ scale: 1.15 }}
