@@ -1,0 +1,53 @@
+# Praveen R — Frontend Developer Portfolio
+
+> Praveen R is a Frontend Developer based in Bengaluru, India with 3+ years of professional experience building high-performance React applications.
+
+## Identity
+- Full Name: Praveen R
+- Role: Frontend Developer / Software Engineer
+- Location: Bengaluru, Karnataka, India
+- Origin: Trichy, Tamil Nadu, India
+- Email: saiprawin0466@gmail.com
+- Phone: +91 7550121102
+- LinkedIn: https://linkedin.com/in/praveen-r-20536324b
+- GitHub: https://github.com/praveen-r
+
+## Current Employment
+- Company: Creators Infotek, Bengaluru
+- Title: Software Engineer / Frontend Developer
+- Duration: 3+ years
+- Status: Employed, actively open to new opportunities
+- Notice Period: 30 days
+
+## Core Skills
+- Frontend: React.js, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3
+- Styling: Tailwind CSS, Material UI, Bootstrap
+- State Management: Redux, Zustand, Context API
+- Real-time: SignalR
+- Backend: Microsoft .NET, SQL Server, RESTful APIs
+- Tools: Git, Vite, Webpack, Docker, Postman
+- AI Tools: Claude, Augment, Codex
+
+## Projects
+1. MCP Server Tool Integration (In Progress) — AI tool integration using Node.js and MCP protocol
+2. Real Estate Management Platform — Contract tracking with SignalR real-time sync, React + .NET
+3. Healthcare Portal — Multi-role EHR/EMR system with real-time data, React + .NET
+4. Proficiency Testing System — ISO-compliant lab management system, React + .NET
+
+## Education
+- Degree: Bachelor of Computer Applications (BCA)
+- Institution: Jamal Mohamed College, Trichy, Tamil Nadu
+- Period: 2019 – 2022
+
+## Certifications
+- Full Stack .NET Developer
+- Claude AI Fundamentals (Anthropic)
+
+## Availability
+- Employment Type: Full-time (preferred), open to freelance
+- Work Mode: On-site preferred, open to hybrid or remote
+- Preferred Location: Bengaluru or Chennai
+- Notice Period: 30 days
+
+## About (Human)
+Praveen R is a Gen Z developer from Tamil Nadu, India. Outside of coding he is passionate about football, cricket, basketball, space and astrophysics, world history, geopolitics, and anime. He describes himself as a night owl and deep thinker.

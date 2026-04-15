@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-950: #0a0a0a;
+  --color-dark-900: #0d0d0d;
+  --color-dark-800: #111118;
+  --color-dark-700: #16161e;
+  --color-dark-600: #1c1c28;
+  --color-orange-500: #FF6B00;
+  --color-orange-400: #FF8C33;
+  --color-orange-600: #CC5500;
+  --color-green-400: #00FF88;
+  --color-green-500: #00CC6A;
+  --color-red-600: #CC0000;
+  --color-red-500: #FF0000;
+  --font-heading: "Bebas Neue", sans-serif;
+  --font-body: "Rajdhani", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+* { cursor: none; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "Rajdhani", sans-serif;
+  background: #0a0a0a;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #FF6B0044; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #FF6B0088; }
+::selection { background: #FF6B0044; color: #fff; }
+
+.scan-lines {
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,107,0,0.015) 2px, rgba(255,107,0,0.015) 4px);
+  pointer-events: none;
+}
+.diag-lines {
+  background: repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(255,107,0,0.02) 10px, rgba(255,107,0,0.02) 11px);
+}
+
+.glow-orange { box-shadow: 0 0 20px #FF6B0033, 0 0 60px #FF6B0011; }
+.glow-orange-strong { box-shadow: 0 0 30px #FF6B0055, 0 0 80px #FF6B0022, 0 0 120px #FF6B0011; }
+.text-glow-orange { text-shadow: 0 0 20px #FF6B0066, 0 0 40px #FF6B0033; }
+.text-glow-green { text-shadow: 0 0 20px #00FF8866, 0 0 40px #00FF8833; }
+.text-glow-red { text-shadow: 0 0 20px #CC000066, 0 0 40px #CC000033; }
+
+@keyframes gradient-shift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+.animate-gradient { background-size: 200% 200%; animation: gradient-shift 6s ease infinite; }
+
+@keyframes float-slow { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-15px)} }
+.animate-float-slow { animation: float-slow 6s ease-in-out infinite; }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.animate-blink { animation: blink 1.5s ease-in-out infinite; }
+
+@keyframes glow-pulse { 0%,100%{box-shadow:0 0 8px #FF6B0044} 50%{box-shadow:0 0 24px #FF6B0066,0 0 48px #FF6B0033} }
+.animate-glow-pulse { animation: glow-pulse 2.5s ease-in-out infinite; }
+
+/* Character image with fallback silhouette */
+.char-img {
+  object-fit: contain;
+  object-position: bottom;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Section diagonal clips */
+.clip-diagonal-top {
+  clip-path: polygon(0 4%, 100% 0, 100% 100%, 0 100%);
+}
+.clip-diagonal-both {
+  clip-path: polygon(0 3%, 100% 0, 100% 97%, 0 100%);
+}
+
+@media (max-width: 768px) {
+  .clip-diagonal-top { clip-path: polygon(0 2%, 100% 0, 100% 100%, 0 100%); }
+  .clip-diagonal-both { clip-path: polygon(0 1.5%, 100% 0, 100% 98.5%, 0 100%); }
+}
