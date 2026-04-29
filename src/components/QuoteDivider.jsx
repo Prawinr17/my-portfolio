@@ -99,7 +99,7 @@ export default function QuoteDivider({ text, author }) {
       >
         <img
           src="/young naruto.png"
-          alt="Naruto Rasengan"
+          alt="Praveen R portfolio decorative quote section, Naruto Rasengan illustration"
           className="h-[180px] sm:h-[210px] w-auto opacity-80"
         />
       </motion.div>

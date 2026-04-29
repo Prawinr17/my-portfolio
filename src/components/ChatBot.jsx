@@ -172,13 +172,26 @@ function buildResponse(input) {
     const p = projects.find((pr) => pr.title.includes("Proficiency"));
     if (p) return `🔬 ${p.title}\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\nStatus: ✅ ${p.status}`;
   }
+  if (has("tritrackz", "tri trackz", "tri-trackz", "freight", "logistics", "rfq", "shipment")) {
+    const p = projects.find((pr) => pr.title.includes("TriTrackz"));
+    if (p) return `🚚 ${p.title} — IN PROGRESS, dattebayo!\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\n\nThis one's an S-Rank mission — multi-tenant, real-time, role-based. Believe it! ⚡`;
+  }
+  if (has("svvatech", "seo", "schema", "json-ld", "search console", "gsc", "robots")) {
+    const p = projects.find((pr) => pr.title.includes("Svvatech"));
+    if (p) return `🔍 ${p.title}\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\nStatus: ✅ ${p.status}`;
+  }
+
+  // Best / Top / Favorite work
+  if (has("best", "top", "favorite", "favourite", "proudest", "biggest", "main project", "flagship", "highlight", "most proud", "top project", "top work", "best work")) {
+    return `🏆 Praveen's Top Missions — dattebayo, listen up!\n\nOut of all his scrolls, TWO stand above the rest:\n\n🚚 TriTrackz — Logistics & Freight Platform (IN PROGRESS) 🔄\n   Why it's S-Rank, believe it:\n   • Multi-tenant B2B with 3 role-based portals (Admin, Driver, User) — that's three jutsus in one!\n   • Real-time tracking + RFQ + order management on React + TypeScript + .NET 8 + PostgreSQL\n   • AI-assisted dev (Claude + Augment) boosted his shinobi efficiency by 20% 🔥\n   The kind of mission that scales like the Hokage's vision! ⚡\n\n🔬 Proficiency Testing App — ISO-Certified Lab System ✅\n   Why this scroll hits hard, ya know:\n   • ISO-certified — no shortcuts, full compliance jutsu 📜\n   • Graphical analytics + automated reporting for an entire lab workflow\n   • AI-assisted build cut delivery time by 40% — that's pure ninja speed!\n   Production-grade, mission-critical — not a tutorial scroll! 💪\n\nThese two aren't just projects — they're the heart of his ninja way! 🍥`;
+  }
 
   // All projects
   if (has("project", "mission", "built", "created", "developed", "app", "system", "portfolio")) {
     const list = projects
       .map((p) => `${p.status === "IN PROGRESS" ? "🔄" : "✅"} ${p.title}\n   ${p.technologies.join(" · ")}`)
       .join("\n\n");
-    return `🎯 S-Rank Missions:\n\n${list}\n\nEvery mission delivered with shinobi precision! 💪`;
+    return `🎯 S-Rank Missions:\n\n${list}\n\n🏆 Top of the scroll? TriTrackz 🚚 (in progress) and Proficiency Testing App 🔬 — those are his finest jutsu, believe it!\n\nAsk me "what's his best work?" for the full breakdown. 💪`;
   }
 
   // Education
@@ -196,7 +209,7 @@ function buildResponse(input) {
 
   // AI tools
   if (has("ai", "claude", "augment", "codex", "artificial intelligence", "llm", "gpt")) {
-    return `🤖 Praveen's AI Jutsu:\n\n• Claude — AI pair programming\n• Augment — Code acceleration\n• Codex — Workflow automation\n\nHe also built an MCP Server for AI-tool integration!\n\nAI + Ninja = unstoppable! ⚡`;
+    return `🤖 Praveen's AI Jutsu:\n\n• Claude — AI pair programming\n• Augment — Code acceleration\n• Codex — Workflow automation\n\nAI-assisted dev boosted TriTrackz delivery efficiency by 20%!\n\nAI + Ninja = unstoppable! ⚡`;
   }
 
   // Contact / Hire
@@ -313,7 +326,7 @@ export default function ChatBot() {
               >
                 <img
                   src="/young naruto.png"
-                  alt="Naruto"
+                  alt="Open chat assistant — ask about Praveen R"
                   className="w-full h-full object-cover object-top scale-125"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/30 to-transparent" />

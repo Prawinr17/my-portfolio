@@ -21,7 +21,7 @@ export default function Education() {
       <div ref={introRef} className="relative w-full h-[55vh] sm:h-[60vh] lg:h-[65vh] overflow-hidden">
         <motion.img
           src="/Ninjaschool.png"
-          alt="Ninja Academy"
+          alt="Education section header — Praveen R, BCA from Jamal Mohamed College, Trichy"
           className="w-full h-full object-cover object-[50%_35%]"
           initial={{ scale: 1.1 }}
           animate={introInView ? { scale: 1 } : {}}

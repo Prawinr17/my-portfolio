@@ -99,22 +99,22 @@ export const experience = {
 export const projects = [
   {
     mission: "MISSION 01",
-    title: "MCP Server",
+    title: "TriTrackz — Logistics & Freight Management Platform",
     description:
-      "Building an MCP server to enable AI models to interact with external tools and APIs — core architecture with context management, structured responses, and scalable AI-driven workflows.",
-    technologies: ["Node.js", "AI Integration", "REST APIs"],
+      "Scaled multi-tenant B2B platform with role-based portals (Admin, Driver, User) for RFQ, order management, and shipment tracking. Built React frontend workflows with full API integration, real-time updates, and role-based access control. AI-assisted dev (Claude, Augment) boosted efficiency by 20%.",
+    technologies: ["React", "TypeScript", "Redux Toolkit", ".NET 8", "PostgreSQL"],
     status: "IN PROGRESS",
-    image: "/mission4.png",
+    image: "/misson6.png",
     color: "#FF6B00",
   },
-  {
+    {
     mission: "MISSION 02",
-    title: "Real Estate Online Contract System",
+    title: "Proficiency Testing App",
     description:
-      "Built real-time contract platform with live chat, online signatures, and audit trail. Cut turnaround time by 35%.",
-    technologies: ["React.js", "Zustand", "Formik", "SignalR"],
+      "ISO-certified lab management app with graphical analytics, automated reporting. AI-assisted dev accelerated build by 40%.",
+    technologies: ["React.js", "REST API", "Claude AI", "Augment"],
     status: "COMPLETED",
-    image: "/mission1.png",
+    image: "/mission3.png",
     color: "#FF6B00",
   },
   {
@@ -129,12 +129,24 @@ export const projects = [
   },
   {
     mission: "MISSION 04",
-    title: "Proficiency Testing App",
+    title: "Real Estate Online Contract System",
     description:
-      "ISO-certified lab management app with graphical analytics, automated reporting. AI-assisted dev accelerated build by 40%.",
-    technologies: ["React.js", "REST API", "Claude AI", "Augment"],
+      "Built real-time contract platform with live chat, online signatures, and audit trail. Cut turnaround time by 35%.",
+    technologies: ["React.js", "Zustand", "Formik", "SignalR"],
     status: "COMPLETED",
-    image: "/mission3.png",
+    image: "/misson5.png",
+    color: "#FF6B00",
+  },
+  
+
+  {
+    mission: "MISSION 05",
+    title: "Svvatech — B2B SaaS SEO & Technical Optimization",
+    description:
+      "End-to-end technical SEO foundation for a 29-page B2B SaaS site (manufacturing, logistics, IIoT). Configured 8 JSON-LD schema types validated via Google Rich Results, submitted 44-page sitemap to GSC, resolved migration issues, and optimized robots.txt, meta titles, and alt text across 30+ pages.",
+    technologies: ["JSON-LD Schema", "Google Search Console", "Technical SEO", "robots.txt"],
+    status: "COMPLETED",
+    image: "/mission1.png",
     color: "#FF6B00",
   },
 ];

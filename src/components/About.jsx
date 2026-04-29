@@ -54,7 +54,7 @@ export default function About() {
         >
           <img
             src="/konaha image.png"
-            alt="Valley of the End"
+            alt="Praveen R — About section background, Valley of the End scene"
             className="w-full h-full object-cover object-center"
           />
         </motion.div>

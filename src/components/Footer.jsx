@@ -55,7 +55,7 @@ export default function Footer() {
       >
         <CharacterImage
           src="/NARUTO-1.png"
-          alt="Naruto"
+          alt=""
           color="#FF6B00"
           className="h-[320px] w-auto"
         />
@@ -70,7 +70,7 @@ export default function Footer() {
       >
         <CharacterImage
           src="/footernaruto.png"
-          alt="Naruto"
+          alt=""
           color="#FF6B00"
           className="h-[280px] w-auto"
         />

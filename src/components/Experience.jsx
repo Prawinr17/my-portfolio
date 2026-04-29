@@ -79,7 +79,7 @@ export default function Experience() {
             {/* Academy bg image */}
             <motion.img
               src="/Hokageofc.png"
-              alt="Ninja Academy"
+              alt="Praveen R — Software Engineer at Creators Infotek, Bengaluru"
               className="absolute inset-0 w-full h-full object-cover"
               initial={{ scale: 1.15 }}
               animate={isInView ? { scale: 1 } : {}}

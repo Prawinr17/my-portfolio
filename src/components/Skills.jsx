@@ -215,7 +215,7 @@ export default function Skills() {
               <div className="absolute -inset-10 -z-10 rounded-full bg-[#FF6B00]/[0.05] blur-[50px]" />
               <CharacterImage
                 src="/rasengan.png"
-                alt="Naruto Rasengan"
+                alt="Praveen R skills arsenal — React, TypeScript, .NET tech stack"
                 color="#FF6B00"
                 className="w-[320px] h-auto"
               />

@@ -107,7 +107,7 @@ export default function Contact() {
           >
             <img
               src="/contact_us.jpg"
-              alt="Sasuke and Naruto"
+              alt="Contact Praveen R — Frontend Developer based in Bengaluru, India"
               className="absolute inset-0 w-full h-full object-cover"
             />
             {/* Subtle dark overlay */}

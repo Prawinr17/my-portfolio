@@ -69,7 +69,7 @@ export default function Hero() {
         >
           <CharacterImage
             src="/Naruto Hokage.png"
-            alt="Naruto Hokage"
+            alt="Praveen R — Frontend Developer hero illustration, Naruto Hokage theme"
             color="#FF6B00"
             className="h-[55vh] md:h-[60vh] lg:h-[70vh] xl:h-[78vh] 2xl:h-[82vh] max-h-[680px] w-auto"
           />
@@ -155,7 +155,7 @@ export default function Hero() {
               transition={{ delay: 0.35 }}
               className="font-heading text-3xl sm:text-4xl lg:text-5xl tracking-wider text-[#FF6B00] mt-2"
             >
-              Frontend Engineer
+              Frontend Developer
             </motion.h2>
 
             {/* Body text */}
@@ -212,8 +212,10 @@ export default function Hero() {
               </motion.a>
 
               <motion.a
-                href="/PraveenCv_B.pdf"
+                href="/Praveen_R_Resume.pdf"
                 download="Praveen_R_Resume.pdf"
+                aria-label="Download Praveen R resume PDF"
+                rel="noopener"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-gray-300 font-body font-bold text-sm uppercase tracking-widest rounded-lg hover:bg-white/5 hover:text-white transition-colors cursor-pointer"

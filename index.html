@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- ═══ Primary SEO ═══════════════════════════════════════════════════ -->
@@ -10,9 +12,15 @@
     <meta name="description" content="Praveen R is a Frontend Developer from Bengaluru, India with 3+ years building high-performance React applications at Creators Infotek. Specializing in real-time platforms, scalable UI, and pixel-perfect interfaces. Open to new opportunities." />
     <meta name="keywords" content="Praveen R, Frontend Developer, React Developer, React.js, Next.js, TypeScript, Bengaluru, India, UI Developer, Software Engineer, Hire React Developer, Full Stack Developer, SignalR, .NET Developer" />
     <meta name="author" content="Praveen R" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#FF6B00" />
-    <!-- UPDATE this URL after you know your Vercel domain -->
+
+    <!-- ═══ Geo Targeting ═════════════════════════════════════════════════ -->
+    <meta name="geo.region" content="IN-KA" />
+    <meta name="geo.placename" content="Bengaluru" />
+    <meta name="geo.position" content="12.9716;77.5946" />
+    <meta name="ICBM" content="12.9716, 77.5946" />
+
     <link rel="canonical" href="https://praveen-r-portfolio.vercel.app" />
 
     <!-- ═══ Open Graph — LinkedIn / Facebook preview ══════════════════════ -->
@@ -35,6 +43,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Person",
+      "@id": "https://praveen-r-portfolio.vercel.app/#person",
       "name": "Praveen R",
       "jobTitle": "Frontend Developer",
       "description": "Frontend Developer with 3+ years building high-performance React applications at Creators Infotek, Bengaluru. Specializing in real-time platforms, scalable UI systems, and pixel-perfect interfaces.",
@@ -42,6 +51,12 @@
       "email": "saiprawin0466@gmail.com",
       "telephone": "+917550121102",
       "image": "https://praveen-r-portfolio.vercel.app/Naruto Hokage.png",
+      "subjectOf": {
+        "@type": "DigitalDocument",
+        "name": "Praveen R Resume",
+        "url": "https://praveen-r-portfolio.vercel.app/Praveen_R_Resume.pdf",
+        "encodingFormat": "application/pdf"
+      },
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Bengaluru",
@@ -94,6 +109,147 @@
         },
         "skills": "React.js, Next.js, TypeScript, .NET, SignalR, Redux, Zustand, Tailwind CSS"
       }
+    }
+    </script>
+
+    <!-- ═══ WebSite Schema with SearchAction ═════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://praveen-r-portfolio.vercel.app/#website",
+      "url": "https://praveen-r-portfolio.vercel.app",
+      "name": "Praveen R — Frontend Developer Portfolio",
+      "description": "Portfolio of Praveen R — Frontend Developer specialising in React.js, real-time platforms, and scalable UI architecture.",
+      "inLanguage": "en-IN",
+      "publisher": { "@id": "https://praveen-r-portfolio.vercel.app/#person" }
+    }
+    </script>
+
+    <!-- ═══ Projects ItemList — for AI Search Citations ═══════════════════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Praveen R — Project Portfolio",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "numberOfItems": 5,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "TriTrackz — Logistics & Freight Management Platform",
+            "description": "Multi-tenant B2B platform with role-based portals (Admin, Driver, User) for RFQ, order management, and shipment tracking. React + TypeScript + Redux Toolkit + .NET 8 + PostgreSQL. AI-assisted dev (Claude, Augment) boosted efficiency by 20%.",
+            "creator": { "@id": "https://praveen-r-portfolio.vercel.app/#person" },
+            "keywords": "React, TypeScript, Redux Toolkit, .NET 8, PostgreSQL, Logistics, Freight, B2B SaaS",
+            "creativeWorkStatus": "InProgress"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Proficiency Testing App",
+            "description": "ISO-certified lab management application with graphical analytics and automated reporting. AI-assisted development accelerated build by 40%.",
+            "creator": { "@id": "https://praveen-r-portfolio.vercel.app/#person" },
+            "keywords": "React.js, REST API, Claude AI, Augment, ISO Compliance, Lab Management"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Healthcare Management Platform",
+            "description": "Multi-portal application (Admin, Doctor, Patient) with scheduling, EMR, video consultations, and e-prescriptions.",
+            "creator": { "@id": "https://praveen-r-portfolio.vercel.app/#person" },
+            "keywords": "React.js, Redux, REST API, SignalR, EMR, Healthcare"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Real Estate Online Contract System",
+            "description": "Real-time contract platform with live chat, online signatures, and audit trail. Cut turnaround time by 35%.",
+            "creator": { "@id": "https://praveen-r-portfolio.vercel.app/#person" },
+            "keywords": "React.js, Zustand, Formik, SignalR, E-Signature, Real Estate"
+          }
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "item": {
+            "@type": "CreativeWork",
+            "name": "Svvatech — B2B SaaS SEO & Technical Optimization",
+            "description": "End-to-end technical SEO foundation for a 29-page B2B SaaS site. Configured 8 JSON-LD schema types validated via Google Rich Results, submitted 44-page sitemap to GSC, optimized robots.txt and meta tags across 30+ pages.",
+            "creator": { "@id": "https://praveen-r-portfolio.vercel.app/#person" },
+            "keywords": "JSON-LD Schema, Google Search Console, Technical SEO, robots.txt, B2B SaaS"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- ═══ FAQ Schema — High-impact for ChatGPT / Perplexity / Gemini ═══ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Who is Praveen R?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Praveen R is a Frontend Developer based in Bengaluru, India with 3+ years of professional experience building high-performance React applications at Creators Infotek. He specialises in real-time platforms, scalable UI architecture, and pixel-perfect interfaces."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What technologies does Praveen R specialise in?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Praveen R specialises in React.js, Next.js, TypeScript, Redux, Zustand, SignalR for real-time apps, Tailwind CSS, and Microsoft .NET on the backend. He also uses AI-assisted development tools like Claude, Augment, and Codex."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Praveen R available for hire?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Praveen is currently employed at Creators Infotek in Bengaluru and is actively open to new full-time frontend or full-stack opportunities. His notice period is 30 days. He prefers on-site or hybrid roles in Bengaluru or Chennai but is open to remote."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Praveen R's most notable projects?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "His top projects are TriTrackz (an in-progress multi-tenant logistics and freight platform built with React, TypeScript, .NET 8, and PostgreSQL) and the Proficiency Testing App (an ISO-certified lab management system where AI-assisted development accelerated delivery by 40%). He has also built a Healthcare Management Platform, a Real Estate Online Contract System, and led the Svvatech B2B SaaS SEO optimization."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I contact Praveen R?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can contact Praveen R by email at saiprawin0466@gmail.com or by phone at +91 7550121102. He is also reachable on LinkedIn at linkedin.com/in/praveen-r-20536324b and on GitHub at github.com/Prawinpinto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is Praveen R based?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Praveen R is based in Bengaluru, Karnataka, India. He is originally from Trichy, Tamil Nadu, and is open to relocating within India for the right opportunity."
+          }
+        }
+      ]
     }
     </script>
 

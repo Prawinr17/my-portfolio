@@ -19,7 +19,7 @@ function MissionCard({ project, index, isInView }) {
         <div className="relative h-[240px] overflow-hidden">
           <motion.img
             src={project.image}
-            alt={project.title}
+            alt={`${project.title} — project by Praveen R, built with ${project.technologies.join(", ")}`}
             className="w-full h-full object-cover"
             initial={{ scale: 1.1 }}
             animate={isInView ? { scale: 1 } : {}}
@@ -111,7 +111,7 @@ export default function Projects() {
       <div className="relative w-full h-[45vh] sm:h-[50vh] overflow-hidden">
         <motion.img
           src="/misson_bg.png"
-          alt="Mission Background"
+          alt="Praveen R — Projects portfolio section, React and full-stack work"
           className="w-full h-full object-cover object-center"
           initial={{ scale: 1.1 }}
           animate={isInView ? { scale: 1 } : {}}
