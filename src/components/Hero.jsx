@@ -165,8 +165,8 @@ export default function Hero() {
               transition={{ delay: 0.55 }}
               className="font-body text-base text-gray-400 mt-5 leading-relaxed max-w-md"
             >
-              3+ years building high-performance React apps at Creators
-              Infotek, Bengaluru. Specializing in real-time platforms,
+              3+ years building high-performance React apps at Svavvashaa
+              Technologies, Bengaluru. Specializing in real-time platforms,
               scalable UI systems, and pixel-perfect interfaces.
             </motion.p>
 

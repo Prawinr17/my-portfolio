@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send } from "lucide-react";
 import {
-  skillCategories, experience, projects,
+  skillCategories, experiences, projects,
   education, certificates, contactInfo,
 } from "../data/portfolio";
 
@@ -19,7 +19,7 @@ function buildResponse(input) {
 
   // About / Who
   if (has("who", "about", "yourself", "introduce", "praveen", "tell me", "summary", "profile")) {
-    return "🥷 Praveen R — Full Stack Developer\n\n📍 Bengaluru, India\n🏢 Software Engineer @ Creators Infotek\n⚡ 3+ years building high-performance React apps\n🎯 Specialises in real-time platforms & scalable UI\n\nHis ninja way? Never stop learning, never stop building! 🔥";
+    return "🥷 Praveen R — Full Stack Developer\n\n📍 Bengaluru, India\n🏢 Software Engineer @ Svavvashaa Technologies Pvt Ltd\n⚡ 3+ years building high-performance React apps\n🎯 Specialises in real-time platforms & scalable UI\n\nHis ninja way? Never stop learning, never stop building! 🔥";
   }
 
   // ── Personal Interests ───────────────────────────────────────────────────
@@ -93,12 +93,12 @@ function buildResponse(input) {
 
   // Resume / CV
   if (has("resume", "cv", "download", "pdf")) {
-    return "📄 Praveen's Resume:\n\nHit the Resume button in the Hero section to download it instantly! 📥\n\nCovers his 3+ years at Creators Infotek, full tech stack, all 4 projects, education, and certifications.\n\nA scroll worth reading! 🥷";
+    return "📄 Praveen's Resume:\n\nHit the Resume button in the Hero section to download it instantly! 📥\n\nCovers his 3+ years across Creators Infotek and Svavvashaa Technologies, full tech stack, all projects, education, and certifications.\n\nA scroll worth reading! 🥷";
   }
 
   // Availability / Notice period
   if (has("available", "notice", "when can", "join", "start date", "currently", "looking", "open to work", "actively")) {
-    return "💼 Current Status:\n\n🟡 Employed @ Creators Infotek\n🔍 Actively looking for the right opportunity\n\n⏱️ Notice Period: 30 Days\n✅ Can join within a month of an offer\n\nIf you've got the right mission — send that jutsu! 🎯";
+    return "💼 Current Status:\n\n🟡 Employed @ Svavvashaa Technologies Pvt Ltd\n🔍 Actively looking for the right opportunity\n\n⏱️ Notice Period: 30 Days\n✅ Can join within a month of an offer\n\nIf you've got the right mission — send that jutsu! 🎯";
   }
 
   // Remote / Location / Relocation
@@ -150,12 +150,17 @@ function buildResponse(input) {
   }
 
   // Experience
-  if (has("experience", "work", "job", "career", "company", "creator", "infotek", "saga", "employed", "role", "designation", "position", "title", "current job", "current role")) {
-    const bullets = experience.description.slice(0, 4).map((d) => `• ${d}`).join("\n");
-    return `⚔️ The Creators Infotek Saga:\n\n🏢 ${experience.company}\n👤 ${experience.title}\n📅 ${experience.period}\n📍 ${experience.location}\n\nKey Missions:\n${bullets}\n\nAnd much more — a 3-year arc of legendary battles! 🍥`;
+  if (has("experience", "work", "job", "career", "company", "creator", "infotek", "svavvashaa", "svavvashaa technologies", "saga", "employed", "role", "designation", "position", "title", "current job", "current role")) {
+    const [current, previous] = experiences;
+    const bullets = current.description.slice(0, 4).map((d) => `• ${d}`).join("\n");
+    return `⚔️ ${current.arcTitle}:\n\n🏢 ${current.company}\n👤 ${current.title}\n📅 ${current.period}\n📍 ${current.location}\n\nKey Missions:\n${bullets}\n\nBefore that — ${previous.arcTitle}: ${previous.company} (${previous.period}), building real-time freight & logistics platforms. Two arcs of legendary battles! 🍥`;
   }
 
   // Specific projects
+  if (has("threadpos", "thread pos", "pos", "gst", "point of sale", "inventory", "billing", "retailer", "clothing")) {
+    const p = projects.find((pr) => pr.title.includes("ThreadPOS"));
+    if (p) return `🧵 ${p.title} — IN PROGRESS, dattebayo!\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\n\nThis is the current S-Rank mission — modular monolith, tenant isolation, GST compliance done right! ⚡`;
+  }
   if (has("mcp", "model context", "ai server", "node")) {
     const p = projects.find((pr) => pr.title.includes("MCP"));
     if (p) return `🤖 ${p.title} — ${p.status}\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\n\nBuilding the future of AI-tool integration! ⚡`;
@@ -183,7 +188,7 @@ function buildResponse(input) {
 
   // Best / Top / Favorite work
   if (has("best", "top", "favorite", "favourite", "proudest", "biggest", "main project", "flagship", "highlight", "most proud", "top project", "top work", "best work")) {
-    return `🏆 Praveen's Top Missions — dattebayo, listen up!\n\nOut of all his scrolls, TWO stand above the rest:\n\n🚚 TriTrackz — Logistics & Freight Platform (IN PROGRESS) 🔄\n   Why it's S-Rank, believe it:\n   • Multi-tenant B2B with 3 role-based portals (Admin, Driver, User) — that's three jutsus in one!\n   • Real-time tracking + RFQ + order management on React + TypeScript + .NET 8 + PostgreSQL\n   • AI-assisted dev (Claude + Augment) boosted his shinobi efficiency by 20% 🔥\n   The kind of mission that scales like the Hokage's vision! ⚡\n\n🔬 Proficiency Testing App — ISO-Certified Lab System ✅\n   Why this scroll hits hard, ya know:\n   • ISO-certified — no shortcuts, full compliance jutsu 📜\n   • Graphical analytics + automated reporting for an entire lab workflow\n   • AI-assisted build cut delivery time by 40% — that's pure ninja speed!\n   Production-grade, mission-critical — not a tutorial scroll! 💪\n\nThese two aren't just projects — they're the heart of his ninja way! 🍥`;
+    return `🏆 Praveen's Top Missions — dattebayo, listen up!\n\nOut of all his scrolls, THREE stand above the rest:\n\n🧵 ThreadPOS — GST-Compliant POS & Inventory Platform (IN PROGRESS) 🔄\n   The current flagship mission, believe it:\n   • Multi-tenant SaaS for Indian clothing retailers — Pro (GST) & Lite (non-GST) tiers\n   • Modular monolith across 13 bounded contexts, PostgreSQL row-level security for tenant isolation\n   • Outbox-driven event pipeline + offline-first billing with WhatsApp receipts\n   • AI-assisted dev (Claude) accelerating schema migrations and GST audits 🔥\n\n🚚 TriTrackz — Logistics & Freight Platform ✅\n   Why it's S-Rank, believe it:\n   • Multi-tenant B2B with 3 role-based portals (Admin, Driver, User) — that's three jutsus in one!\n   • Real-time tracking + RFQ + order management on React + TypeScript + .NET 8 + PostgreSQL\n   • AI-assisted dev (Claude + Augment) boosted his shinobi efficiency by 20% 🔥\n\n🔬 Proficiency Testing App — ISO-Certified Lab System ✅\n   Why this scroll hits hard, ya know:\n   • ISO-certified — no shortcuts, full compliance jutsu 📜\n   • Graphical analytics + automated reporting for an entire lab workflow\n   • AI-assisted build cut delivery time by 40% — that's pure ninja speed!\n\nThese three aren't just projects — they're the heart of his ninja way! 🍥`;
   }
 
   // All projects
@@ -191,7 +196,7 @@ function buildResponse(input) {
     const list = projects
       .map((p) => `${p.status === "IN PROGRESS" ? "🔄" : "✅"} ${p.title}\n   ${p.technologies.join(" · ")}`)
       .join("\n\n");
-    return `🎯 S-Rank Missions:\n\n${list}\n\n🏆 Top of the scroll? TriTrackz 🚚 (in progress) and Proficiency Testing App 🔬 — those are his finest jutsu, believe it!\n\nAsk me "what's his best work?" for the full breakdown. 💪`;
+    return `🎯 S-Rank Missions:\n\n${list}\n\n🏆 Top of the scroll? ThreadPOS 🧵 (current, in progress) alongside TriTrackz 🚚 and Proficiency Testing App 🔬 — those are his finest jutsu, believe it!\n\nAsk me "what's his best work?" for the full breakdown. 💪`;
   }
 
   // Education
@@ -209,7 +214,7 @@ function buildResponse(input) {
 
   // AI tools
   if (has("ai", "claude", "augment", "codex", "artificial intelligence", "llm", "gpt")) {
-    return `🤖 Praveen's AI Jutsu:\n\n• Claude — AI pair programming\n• Augment — Code acceleration\n• Codex — Workflow automation\n\nAI-assisted dev boosted TriTrackz delivery efficiency by 20%!\n\nAI + Ninja = unstoppable! ⚡`;
+    return `🤖 Praveen's AI Jutsu:\n\n• Claude — AI pair programming, powering ThreadPOS's schema migrations & GST audits right now\n• Augment — Code acceleration\n• Codex — Workflow automation\n\nAI-assisted dev also boosted TriTrackz delivery efficiency by 20%!\n\nAI + Ninja = unstoppable! ⚡`;
   }
 
   // Contact / Hire

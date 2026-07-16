@@ -13,11 +13,16 @@
 - GitHub: https://github.com/Prawinpinto
 
 ## Current Employment
-- Company: Creators Infotek, Bengaluru
+- Company: Svavvashaa Technologies Pvt Ltd, Bengaluru
 - Title: Software Engineer / Frontend Developer
-- Duration: 3+ years
+- Duration: May 2026 — Present
 - Status: Employed, actively open to new opportunities
 - Notice Period: 30 days
+
+## Previous Employment
+- Company: Creators Infotek, Bengaluru
+- Title: Software Engineer / Frontend Developer
+- Duration: 2023 — 2026 (3+ years)
 
 ## Core Skills
 - Frontend: React.js, Next.js, TypeScript, JavaScript (ES6+), HTML5, CSS3
@@ -29,11 +34,12 @@
 - AI Tools: Claude, Augment, Codex
 
 ## Projects
-1. TriTrackz — Logistics & Freight Management Platform (In Progress) — Multi-tenant B2B platform with Admin/Driver/User portals for RFQ, orders, and shipment tracking. React + TypeScript + Redux Toolkit + .NET 8 + PostgreSQL
-2. Real Estate Management Platform — Contract tracking with SignalR real-time sync, React + .NET
-3. Healthcare Portal — Multi-role EHR/EMR system with real-time data, React + .NET
-4. Proficiency Testing System — ISO-compliant lab management system, React + .NET
-5. Svvatech — B2B SaaS SEO & Technical Optimization — End-to-end technical SEO for a 29-page site: 8 JSON-LD schema types, GSC sitemap submission, migration cleanup, robots.txt and meta optimization
+1. ThreadPOS — GST-Compliant POS & Inventory Platform (In Progress, current flagship) — Multi-tenant SaaS for Indian clothing retailers with Pro (GST) and Lite (non-GST) tiers, modular monolith across 13 bounded contexts, PostgreSQL row-level security, outbox-driven event pipeline, offline-first billing with WhatsApp receipts. React + TypeScript + .NET 10 + PostgreSQL + MediatR/CQRS
+2. TriTrackz — Logistics & Freight Management Platform (Completed) — Multi-tenant B2B platform with Admin/Driver/User portals for RFQ, orders, and shipment tracking. React + TypeScript + Redux Toolkit + .NET 8 + PostgreSQL
+3. Proficiency Testing System — ISO-compliant lab management system, React + .NET
+4. Healthcare Portal — Multi-role EHR/EMR system with real-time data, React + .NET
+5. Real Estate Management Platform — Contract tracking with SignalR real-time sync, React + .NET
+6. Svvatech — B2B SaaS SEO & Technical Optimization — End-to-end technical SEO for a 29-page site: 8 JSON-LD schema types, GSC sitemap submission, migration cleanup, robots.txt and meta optimization
 
 ## Education
 - Degree: Bachelor of Computer Applications (BCA)
@@ -56,16 +62,16 @@ Praveen R is a Gen Z developer from Tamil Nadu, India. Outside of coding he is p
 ## Frequently Asked Questions
 
 Q: Who is Praveen R?
-A: Praveen R is a Frontend Developer based in Bengaluru, India with 3+ years building React applications at Creators Infotek.
+A: Praveen R is a Frontend Developer based in Bengaluru, India with 3+ years building React applications. He currently works at Svavvashaa Technologies Pvt Ltd, after previously building real-time freight & logistics platforms at Creators Infotek.
 
 Q: What does Praveen R specialise in?
 A: React.js, Next.js, TypeScript, Redux, Zustand, SignalR for real-time apps, Tailwind CSS, and Microsoft .NET. He uses AI-assisted dev tools (Claude, Augment, Codex).
 
 Q: Is Praveen R available for hire?
-A: Yes — currently employed at Creators Infotek and actively open to new full-time roles. Notice period: 30 days. Prefers on-site or hybrid in Bengaluru / Chennai, open to remote.
+A: Yes — currently employed at Svavvashaa Technologies Pvt Ltd and actively open to new full-time roles. Notice period: 30 days. Prefers on-site or hybrid in Bengaluru / Chennai, open to remote.
 
 Q: What are Praveen R's most notable projects?
-A: His top two projects are TriTrackz (in-progress multi-tenant logistics & freight platform — React, TypeScript, .NET 8, PostgreSQL) and the Proficiency Testing App (ISO-certified lab management system — AI-assisted dev cut delivery time by 40%).
+A: His current flagship project is ThreadPOS, an in-progress multi-tenant GST-compliant POS and inventory SaaS platform for Indian clothing retailers (React, TypeScript, .NET 10, PostgreSQL). Other notable projects include TriTrackz (multi-tenant logistics & freight platform — React, TypeScript, .NET 8, PostgreSQL) and the Proficiency Testing App (ISO-certified lab management system — AI-assisted dev cut delivery time by 40%).
 
 Q: How can I contact Praveen R?
 A: Email saiprawin0466@gmail.com, phone +91 7550121102, LinkedIn linkedin.com/in/praveen-r-20536324b, GitHub github.com/Prawinpinto.

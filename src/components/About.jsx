@@ -28,7 +28,7 @@ const profileItems = [
   { icon: MapPin, label: "Village", value: "Bengaluru, India" },
   { icon: Clock, label: "Experience", value: "3+ Years of Battle" },
   { icon: Target, label: "Specialty", value: "React.js · TypeScript · Redux" },
-  { icon: Code2, label: "Current Mission", value: "Creators Infotek" },
+  { icon: Code2, label: "Current Mission", value: "Svavvashaa Technologies" },
 ];
 
 export default function About() {
@@ -194,9 +194,10 @@ export default function About() {
                 modern JavaScript ecosystems.
               </p>
               <p className="font-body text-base text-gray-400 leading-relaxed">
-                At <span className="text-white font-semibold">Creators Infotek</span>, I architect
-                scalable frontend solutions for complex enterprise platforms. My ninja way? Never
-                stop learning, never stop building.
+                At <span className="text-white font-semibold">Svavvashaa Technologies</span>, I build
+                scalable React and TypeScript applications with Claude AI as an embedded pair-programmer —
+                after architecting real-time freight & logistics platforms at Creators Infotek. My ninja way?
+                Never stop learning, never stop building.
               </p>
 
               {/* Quote */}
