@@ -57,9 +57,14 @@ export default function Education() {
             <span className="font-mono text-sm text-[#00FF88] mb-2 block tracking-wider">
               {"// Chapter 05"}
             </span>
-            <h2 className="font-heading text-6xl sm:text-7xl lg:text-8xl text-white tracking-wider">
+            <motion.h2
+              initial={{ opacity: 0, y: 24, clipPath: "inset(100% 0 0 0)" }}
+              animate={introInView ? { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" } : {}}
+              transition={{ duration: 0.55, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="font-heading text-6xl sm:text-7xl lg:text-8xl text-white tracking-wider"
+            >
               THE ACADEMY
-            </h2>
+            </motion.h2>
             <motion.div
               initial={{ scaleX: 0 }}
               animate={introInView ? { scaleX: 1 } : {}}

@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send } from "lucide-react";
 import {
-  skillCategories, experiences, projects,
+  skillCategories, careerRecord, projects,
   education, certificates, contactInfo,
 } from "../data/portfolio";
 
@@ -151,52 +151,76 @@ function buildResponse(input) {
 
   // Experience
   if (has("experience", "work", "job", "career", "company", "creator", "infotek", "svavvashaa", "svavvashaa technologies", "saga", "employed", "role", "designation", "position", "title", "current job", "current role")) {
-    const [current, previous] = experiences;
-    const bullets = current.description.slice(0, 4).map((d) => `• ${d}`).join("\n");
-    return `⚔️ ${current.arcTitle}:\n\n🏢 ${current.company}\n👤 ${current.title}\n📅 ${current.period}\n📍 ${current.location}\n\nKey Missions:\n${bullets}\n\nBefore that — ${previous.arcTitle}: ${previous.company} (${previous.period}), building real-time freight & logistics platforms. Two arcs of legendary battles! 🍥`;
+    const [assign1, assign2] = careerRecord.assignments;
+    const bullets2 = assign2.records.slice(0, 3).map(r => `• ${r}`).join("\n");
+    return `⚔️ Shinobi Career Archive:\n\n🏢 ${careerRecord.company}\n📍 ${careerRecord.location}\n📅 ${careerRecord.overallPeriod} (${careerRecord.overallDuration})\n\n🟡 Arc 1 — ${assign1.title} @ ${assign1.team} (${assign1.period})\nBuilt web apps across multiple projects: KYC, RFQ, billing, healthcare, POS, real estate.\n\n🟠 Arc 2 — ${assign2.title} @ ${assign2.team} (${assign2.period})\n${bullets2}\n\nTwo arcs. Same fire. Zero ceilings. 🍥⚡`;
   }
 
-  // Specific projects
-  if (has("threadpos", "thread pos", "pos", "gst", "point of sale", "inventory", "billing", "retailer", "clothing")) {
+  // First project
+  if (has("first project", "first mission", "first app", "started with", "how he started", "beginning", "debut", "first work", "initial project", "very first")) {
+    return `🌱 His First Mission — Where It All Began:\n\n⚡ Forsa — Workforce Development Platform\nThis was Praveen's first production project right out of training!\n\n📌 What he built:\n• Main dashboard with key workforce metrics\n• Associate creation & edit flows — onboarding with training assignments\n• Asset & business opportunity allocation\n• Employee portal and training center portal UI\n• Reports module for tracking Associate progress\n\nStack: React.js · Bootstrap · REST API · JavaScript\n\n💭 Looking back — \"basic CRUD patterns, navigation, real API calls for the first time. That feeling of seeing your code live in production? That's when it clicked.\"\n\nFrom that first scroll — to S-Rank missions now. 🍥 Growth mode: activated! ⚡`;
+  }
+
+  // Latest project
+  if (has("latest project", "newest project", "most recent project", "current project", "latest mission", "recent work", "newest work", "what is he working", "working on now", "last project")) {
+    return `🔥 Latest Mission — Most Recent Work:\n\n🧵 ThreadPOS — POS & Business Management Application\nThis is Praveen's most recently completed project!\n\n📌 What he built:\n• Full-stack POS and business management app across 8 modules\n• Product QR code generation + printing via billing machine\n• Scanning a QR code auto-adds the product to the billing list\n• GST workflows — GST setup, collection + GSTR-2B & GSTR-3B summary reports\n• POS operations, product management, billing & database operations end-to-end\n\nStack: React.js · C# · ASP.NET Web API · PostgreSQL\nRank: S-Rank · Status: ✅ Completed\n\n💡 After Forsa (his first) → all the way to building a full POS + GST system — that's the arc! 🍥⚡`;
+  }
+
+  // Most interesting / exciting project
+  if (has("most interesting", "most exciting", "coolest", "favourite project", "favorite project", "which project", "exciting project", "interesting project", "fun project", "enjoyed most", "liked most", "best part")) {
+    return `🔥 Most Interesting Mission — TriTrackz!\n\n🚚 TriTrackz — Logistics Aggregation Platform (S-Rank)\n\nWhy it's the most exciting, believe it:\n\n🧩 Complexity — 7 modules, 3 role-based portals (Admin, Driver, User)\n📋 RFQ flows — Forward, Backward, Share, Direct, Preferred Network, Common RFQ — 6 different types!\n🚗 Driver App UI — trip assignment, POP (Proof of Pickup) + POD (Proof of Delivery) full flow\n👥 Role-based KYC & onboarding for transport companies, brokers & carriers\n🔄 Real-time carrier bidding\n\nStack: React.js · C# · ASP.NET Web API · PostgreSQL\n\nThe sheer variety of user roles, workflows, and real-time interactions made this feel like building an entire ecosystem — not just an app!\n\nThat's what makes it unforgettable. 🍥⚡`;
+  }
+
+  // Difficulty / challenges faced
+  if (has("difficult", "challenge", "hard part", "struggle", "tough", "obstacle", "problem faced", "hardest", "toughest", "what was hard", "biggest challenge", "pain point", "faced issue")) {
+    return `⚔️ Hardest Battles Praveen Faced:\n\n🧩 1. TriTrackz — 6 Types of RFQ\nBuilding 6 completely different RFQ workflow types in one system — forward, backward, shared, direct, preferred network, common — each with its own logic, roles, and states. Mapping all these without breaking each other? Pure strategy.\n\n📋 2. Hasteri — 10-Stage PT Workflow\nThe Proficiency Testing app had a 10-stage sequential process where each stage could only open after admin completion. Getting state management right across both Admin and Participant portals — with proper role-based restrictions at button level — was intense.\n\n🏥 3. Tabib — 100ms Video Integration\nIntegrating the 100ms SDK for live doctor-patient video consultation — building call screen layouts, handling session states, prescription screens mid-call. First time working with live video infrastructure.\n\n🔗 4. Closing Pro — SignalR + Multi-role Comments\nReal-time contract-level comments via SignalR, synced across owners, brokers & agents simultaneously. Keeping the comment thread live without stale data or race conditions took real effort.\n\n💡 Every battle made him sharper. That's the ninja way! 🍥⚡`;
+  }
+
+  // Specific projects — all 7 real ones
+  if (has("threadpos", "thread pos", "pos", "gst", "point of sale", "billing", "retailer", "clothing", "qr code")) {
     const p = projects.find((pr) => pr.title.includes("ThreadPOS"));
-    if (p) return `🧵 ${p.title} — IN PROGRESS, dattebayo!\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\n\nThis is the current S-Rank mission — modular monolith, tenant isolation, GST compliance done right! ⚡`;
+    if (p) return `🧵 ${p.title} — ${p.summary}\n\n${p.description}\n\n🔑 Key Highlights:\n• QR code generation + printing via billing machine\n• GST workflows — GSTR-2B and GSTR-3B summary reports\n• 8 modules: POS, product management, billing, GST & more\n\nStack: ${p.technologies.join(" · ")}\nStatus: ✅ ${p.statusLabel}\n\nS-Rank full-stack mission! ⚡`;
   }
-  if (has("mcp", "model context", "ai server", "node")) {
-    const p = projects.find((pr) => pr.title.includes("MCP"));
-    if (p) return `🤖 ${p.title} — ${p.status}\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\n\nBuilding the future of AI-tool integration! ⚡`;
-  }
-  if (has("real estate", "contract", "property", "zustand", "formik")) {
-    const p = projects.find((pr) => pr.title.includes("Real Estate"));
-    if (p) return `🏠 ${p.title}\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\nStatus: ✅ ${p.status}`;
-  }
-  if (has("health", "hospital", "doctor", "patient", "medical", "ehr", "emr")) {
-    const p = projects.find((pr) => pr.title.includes("Healthcare"));
-    if (p) return `🏥 ${p.title}\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\nStatus: ✅ ${p.status}`;
-  }
-  if (has("proficiency", "tyre", "lab", "iso", "testing", "augment")) {
-    const p = projects.find((pr) => pr.title.includes("Proficiency"));
-    if (p) return `🔬 ${p.title}\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\nStatus: ✅ ${p.status}`;
-  }
-  if (has("tritrackz", "tri trackz", "tri-trackz", "freight", "logistics", "rfq", "shipment")) {
+  if (has("tritrackz", "tri trackz", "tri-trackz", "logistics", "rfq", "carrier", "driver", "shipment", "freight", "pop", "pod")) {
     const p = projects.find((pr) => pr.title.includes("TriTrackz"));
-    if (p) return `🚚 ${p.title} — IN PROGRESS, dattebayo!\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\n\nThis one's an S-Rank mission — multi-tenant, real-time, role-based. Believe it! ⚡`;
+    if (p) return `🚚 ${p.title} — ${p.summary}\n\n${p.description}\n\n🔑 Key Highlights:\n• 7 modules with role-based KYC onboarding\n• 6 RFQ workflow types — forward, backward, shared, direct, preferred, common\n• Driver app UI + full POP & POD delivery flow\n• Real-time carrier bidding\n\nStack: ${p.technologies.join(" · ")}\nStatus: ✅ ${p.statusLabel}\n\nS-Rank — most complex mission to date! 🎯`;
   }
-  if (has("svvatech", "seo", "schema", "json-ld", "search console", "gsc", "robots")) {
+  if (has("hasteri", "proficiency", "proficiency testing", "lab", "iso", "pt workflow", "participant")) {
+    const p = projects.find((pr) => pr.title.includes("Hasteri"));
+    if (p) return `🔬 ${p.title} — ${p.summary}\n\n${p.description}\n\n🔑 Key Highlights:\n• Admin + Participant dual portals with role-based access\n• 10-stage sequential PT workflow (each stage unlocks after admin approval)\n• UMS with menu + button-level restrictions\n• Maintaining app end-to-end including reports, invoices & certificates\n\nStack: ${p.technologies.join(" · ")}\nStatus: ✅ ${p.statusLabel}`;
+  }
+  if (has("tabib", "health", "hospital", "doctor", "patient", "medical", "100ms", "video consult", "appointment")) {
+    const p = projects.find((pr) => pr.title.includes("Tabib"));
+    if (p) return `🏥 ${p.title} — ${p.summary}\n\n${p.description}\n\n🔑 Key Highlights:\n• Patient onboarding + admin-driven patient creation\n• 8 admin master screens (specialization, degree, medicine…)\n• Appointment module for both admin & patient — scheduled + instant booking\n• 100ms video consultation with call layouts + prescription screens\n\nStack: ${p.technologies.join(" · ")}\nStatus: ✅ ${p.statusLabel}`;
+  }
+  if (has("svvatech", "svavvashaa website", "company website", "wordpress", "elementor", "seo", "schema", "json-ld", "search console", "gsc", "geo", "ga4")) {
     const p = projects.find((pr) => pr.title.includes("Svvatech"));
-    if (p) return `🔍 ${p.title}\n\n${p.description}\n\nStack: ${p.technologies.join(", ")}\nStatus: ✅ ${p.status}`;
+    if (p) return `🌐 ${p.title} — ${p.summary}\n\n${p.description}\n\n🔑 Key Highlights:\n• 29-page B2B site from scratch — custom widget plugin\n• 8 JSON-LD schema types + 44-page XML sitemap\n• GA4 / Search Console integration\n• Weekly optimization + bi-weekly GEO content reviews\n\nStack: ${p.technologies.join(" · ")}\nStatus: ✅ ${p.statusLabel}`;
+  }
+  if (has("closing pro", "real estate", "contract", "property", "broker", "agent", "signalr", "formik", "zustand")) {
+    const p = projects.find((pr) => pr.title.includes("Closing Pro"));
+    if (p) return `🏠 ${p.title} — ${p.summary}\n\n${p.description}\n\n🔑 Key Highlights:\n• Role-based onboarding for owners, brokers & agents\n• Contract creation → sharing → filling → review → closure workflow\n• SignalR real-time comments per contract\n• Full activity tracking — edits, status changes, milestones\n\nStack: ${p.technologies.join(" · ")}\nStatus: ✅ ${p.statusLabel}`;
+  }
+  if (has("forsa", "workforce", "associate", "first project", "training center", "people management")) {
+    const p = projects.find((pr) => pr.title.includes("Forsa"));
+    if (p) return `⚡ ${p.title} — ${p.summary}\n\n${p.description}\n\n🔑 Key Highlights:\n• Dashboard with key workforce metrics\n• Associate creation, training assignment, asset allocation\n• Employee portal + training center portal\n• Reports module for Associate progress\n\n💡 This was Praveen's FIRST production project — where it all began!\n\nStack: ${p.technologies.join(" · ")}\nStatus: ✅ ${p.statusLabel}`;
   }
 
   // Best / Top / Favorite work
   if (has("best", "top", "favorite", "favourite", "proudest", "biggest", "main project", "flagship", "highlight", "most proud", "top project", "top work", "best work")) {
-    return `🏆 Praveen's Top Missions — dattebayo, listen up!\n\nOut of all his scrolls, THREE stand above the rest:\n\n🧵 ThreadPOS — GST-Compliant POS & Inventory Platform (IN PROGRESS) 🔄\n   The current flagship mission, believe it:\n   • Multi-tenant SaaS for Indian clothing retailers — Pro (GST) & Lite (non-GST) tiers\n   • Modular monolith across 13 bounded contexts, PostgreSQL row-level security for tenant isolation\n   • Outbox-driven event pipeline + offline-first billing with WhatsApp receipts\n   • AI-assisted dev (Claude) accelerating schema migrations and GST audits 🔥\n\n🚚 TriTrackz — Logistics & Freight Platform ✅\n   Why it's S-Rank, believe it:\n   • Multi-tenant B2B with 3 role-based portals (Admin, Driver, User) — that's three jutsus in one!\n   • Real-time tracking + RFQ + order management on React + TypeScript + .NET 8 + PostgreSQL\n   • AI-assisted dev (Claude + Augment) boosted his shinobi efficiency by 20% 🔥\n\n🔬 Proficiency Testing App — ISO-Certified Lab System ✅\n   Why this scroll hits hard, ya know:\n   • ISO-certified — no shortcuts, full compliance jutsu 📜\n   • Graphical analytics + automated reporting for an entire lab workflow\n   • AI-assisted build cut delivery time by 40% — that's pure ninja speed!\n\nThese three aren't just projects — they're the heart of his ninja way! 🍥`;
+    return `🏆 Praveen's Top Missions:\n\n🥇 S-Rank — TriTrackz 🚚\nMost complex: 7 modules, 6 RFQ types, 3 role portals, driver app + real-time bidding\n\n🥈 S-Rank — ThreadPOS 🧵\nFull POS system: QR billing, GST workflows (GSTR-2B, GSTR-3B), 8 modules end-to-end\n\n🥉 A-Rank — Hasteri 🔬\nMost intricate flow: 10-stage PT workflow, dual portals, button-level role restrictions\n\n🌐 A-Rank — Svvatech Website\nOwned the whole thing: 29 pages, 8 schema types, SEO infrastructure + GEO\n\nAll 7 missions are live. No tutorials — real production code. 💪\n\nAsk about any specific one for the full breakdown! ⚡`;
   }
 
   // All projects
   if (has("project", "mission", "built", "created", "developed", "app", "system", "portfolio")) {
     const list = projects
-      .map((p) => `${p.status === "IN PROGRESS" ? "🔄" : "✅"} ${p.title}\n   ${p.technologies.join(" · ")}`)
+      .filter(p => !p.placeholder)
+      .map((p) => {
+        const icon = p.rank === "S" ? "🔴" : p.rank === "A" ? "🟢" : "🔵";
+        return `${icon} ${p.rank}-Rank · Mission ${p.missionNumber} · ${p.title}\n   ${p.summary}`;
+      })
       .join("\n\n");
-    return `🎯 S-Rank Missions:\n\n${list}\n\n🏆 Top of the scroll? ThreadPOS 🧵 (current, in progress) alongside TriTrackz 🚚 and Proficiency Testing App 🔬 — those are his finest jutsu, believe it!\n\nAsk me "what's his best work?" for the full breakdown. 💪`;
+    return `🎯 All 7 Missions:\n\n${list}\n\n🏆 Ask "what's his best work?", "first project", "latest project", or "most interesting project" for details!\n\nEvery mission is live — real production code! ⚡`;
   }
 
   // Education
@@ -239,8 +263,8 @@ function buildResponse(input) {
 // ─── Constants ───────────────────────────────────────────────────────────────
 const SUGGESTIONS = [
   "What are his skills? 🥷",
-  "Show me his projects 🎯",
-  "Work experience? ⚔️",
+  "His first project? 🌱",
+  "Most interesting project? 🔥",
   "How to contact? 📬",
 ];
 

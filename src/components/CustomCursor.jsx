@@ -1,131 +1,199 @@
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState, useReducer } from "react";
 
-// Kunai — tip is at top-left (0,0) for pixel-perfect click accuracy
-function KunaiSVG({ size = 32, hovering = false, clicking = false }) {
-  const color = hovering || clicking ? "#FF6B00" : "#d4a96a";
-  const glow = hovering || clicking ? "#FF6B0066" : "transparent";
+const isTouch = typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches;
+const prefersReduced = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function useCursorPos() {
+  const pos  = useRef({ x: -200, y: -200 });
+  const anim = useRef({ x: -200, y: -200 });
+  const raf  = useRef(null);
+  const [, tick] = useReducer((n) => n + 1, 0);
+
+  useEffect(() => {
+    if (isTouch) return;
+    const onMove = (e) => { pos.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => window.removeEventListener("mousemove", onMove);
+  }, []);
+
+  useEffect(() => {
+    if (isTouch || prefersReduced) return;
+    const loop = () => {
+      const { x: tx, y: ty } = pos.current;
+      const { x: ax, y: ay } = anim.current;
+      anim.current = { x: ax + (tx - ax) * 0.22, y: ay + (ty - ay) * 0.22 };
+      tick();
+      raf.current = requestAnimationFrame(loop);
+    };
+    raf.current = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(raf.current);
+  }, []);
+
+  return { raw: pos, smooth: anim };
+}
+
+// SVG rasengan drawn inline — wind blades + swirling core
+function RasenganSVG({ size }) {
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 32 32"
+      viewBox="0 0 48 48"
       fill="none"
-      style={{ filter: hovering ? `drop-shadow(0 0 6px ${glow})` : "none" }}
+      style={{ overflow: "visible" }}
     >
-      {/* Blade — tapers to tip at top-left (2,2) */}
-      <path
-        d="M2 2 L10 14 L14 10 Z"
-        fill={color}
-        opacity="0.95"
-      />
-      {/* Blade edge highlight */}
-      <path
-        d="M2 2 L10 14"
-        stroke="white"
-        strokeWidth="0.6"
-        opacity="0.4"
-      />
-      {/* Guard / collar */}
-      <rect
-        x="10.5" y="13" width="7" height="3"
-        rx="1"
-        transform="rotate(45 14 14.5)"
-        fill={color}
-        opacity="0.7"
-      />
-      {/* Handle with bandage wrap */}
-      <path
-        d="M15 16 L24 25"
-        stroke={color}
-        strokeWidth="3"
-        strokeLinecap="round"
-        opacity="0.85"
-      />
-      {/* Bandage lines */}
-      <line x1="17" y1="17.5" x2="19.5" y2="15" stroke="white" strokeWidth="0.7" opacity="0.25" />
-      <line x1="19" y1="19.5" x2="21.5" y2="17" stroke="white" strokeWidth="0.7" opacity="0.25" />
-      <line x1="21" y1="21.5" x2="23.5" y2="19" stroke="white" strokeWidth="0.7" opacity="0.25" />
-      {/* Ring at pommel */}
+      <defs>
+        {/* Deep blue swirl core gradient */}
+        <radialGradient id="rsCore" cx="50%" cy="50%" r="50%">
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="1" />
+          <stop offset="30%"  stopColor="#a8e0ff" stopOpacity="1" />
+          <stop offset="65%"  stopColor="#1a90ff" stopOpacity="1" />
+          <stop offset="100%" stopColor="#003eaa" stopOpacity="1" />
+        </radialGradient>
+        {/* Wind blade gradient — white fading out */}
+        <linearGradient id="rsBlade1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.95" />
+          <stop offset="60%"  stopColor="#c0e8ff" stopOpacity="0.5" />
+          <stop offset="100%" stopColor="#4db8ff" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id="rsBlade2" x1="100%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.9" />
+          <stop offset="60%"  stopColor="#c0e8ff" stopOpacity="0.45" />
+          <stop offset="100%" stopColor="#4db8ff" stopOpacity="0" />
+        </linearGradient>
+        {/* Outer glow */}
+        <radialGradient id="rsGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="40%"  stopColor="#1a90ff" stopOpacity="0" />
+          <stop offset="100%" stopColor="#0055cc" stopOpacity="0.35" />
+        </radialGradient>
+        {/* Swirl ring gradient */}
+        <linearGradient id="rsSwirl" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stopColor="#ffffff" stopOpacity="0.8" />
+          <stop offset="50%"  stopColor="#4db8ff" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+
+      {/* Outer ambient glow circle */}
+      <circle cx="24" cy="24" r="22" fill="url(#rsGlow)" />
+
+      {/* Wind blades group — spins as one around centre */}
+      <g style={{ transformOrigin: "24px 24px", animation: "rs-spin-cw 0.7s linear infinite" }}>
+        {/* Blade 1 — left */}
+        <path d="M24 24 L4 6 Q10 14 14 24 Q10 34 4 42 Z"  fill="url(#rsBlade1)" />
+        {/* Blade 2 — right */}
+        <path d="M24 24 L44 6 Q38 14 34 24 Q38 34 44 42 Z" fill="url(#rsBlade2)" />
+        {/* Blade 3 — top */}
+        <path d="M24 24 L6 4 Q16 10 24 14 Q32 10 42 4 Z"  fill="url(#rsBlade1)" opacity="0.75" />
+        {/* Blade 4 — bottom */}
+        <path d="M24 24 L6 44 Q16 38 24 34 Q32 38 42 44 Z" fill="url(#rsBlade2)" opacity="0.75" />
+      </g>
+
+      {/* Swirl outer ring */}
       <circle
-        cx="25.5" cy="26.5" r="2.5"
-        stroke={color}
+        cx="24" cy="24" r="13"
+        stroke="url(#rsSwirl)"
         strokeWidth="1.5"
         fill="none"
-        opacity="0.8"
+        strokeDasharray="20 12 8 4"
+        strokeLinecap="round"
+        style={{ transformOrigin: "24px 24px", animation: "rs-spin-cw 0.5s linear infinite" }}
       />
-      {/* Tip dot — the actual click point */}
-      <circle cx="2" cy="2" r="1.2" fill="white" opacity="0.9" />
+      {/* Swirl inner ring */}
+      <circle
+        cx="24" cy="24" r="9"
+        stroke="#ffffffcc"
+        strokeWidth="1"
+        fill="none"
+        strokeDasharray="12 8 6 3"
+        strokeLinecap="round"
+        style={{ transformOrigin: "24px 24px", animation: "rs-spin-ccw 0.4s linear infinite" }}
+      />
+
+      {/* Core orb */}
+      <circle cx="24" cy="24" r="7" fill="url(#rsCore)" />
+      {/* Core inner bright spot */}
+      <circle cx="22" cy="22" r="3" fill="white" opacity="0.9" />
     </svg>
   );
 }
 
 export default function CustomCursor() {
-  const [pos, setPos]       = useState({ x: 0, y: 0 });
-  const [hovering, setHovering] = useState(false);
-  const [visible, setVisible]   = useState(false);
-  const [clicking, setClicking] = useState(false);
+  const [state, setState] = useState({ visible: false, hover: false, text: false });
+  const [rippleKey, setRippleKey] = useState(0);
+  const ripplePos = useRef({ x: 0, y: 0 });
+  const { raw, smooth } = useCursorPos();
 
   useEffect(() => {
-    if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (isTouch) return;
 
-    const move = (e) => {
-      setPos({ x: e.clientX, y: e.clientY });
-      setVisible(true);
-    };
+    const onEnter = () => setState((s) => ({ ...s, visible: true }));
+    const onLeave = () => setState((s) => ({ ...s, visible: false }));
 
-    const handleHover = (e) => {
+    const onOver = (e) => {
       const t = e.target;
-      setHovering(!!(
-        t.closest("a") ||
-        t.closest("button") ||
-        t.closest("[role='button']") ||
-        t.closest("input") ||
-        t.closest("textarea")
-      ));
+      const isText      = !!t.closest("input, textarea, [contenteditable]");
+      const isClickable = !!t.closest("a, button, [role='button'], [data-cursor='pointer']");
+      setState((s) => ({ ...s, hover: isClickable && !isText, text: isText }));
     };
 
-    const down = () => setClicking(true);
-    const up   = () => setClicking(false);
+    const onDown = () => {
+      ripplePos.current = { ...raw.current };
+      setRippleKey((k) => k + 1);
+    };
 
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mousedown", down);
-    window.addEventListener("mouseup", up);
-    document.addEventListener("mouseover", handleHover);
-    document.addEventListener("mouseleave", () => setVisible(false));
-    document.addEventListener("mouseenter", () => setVisible(true));
+    document.addEventListener("mouseenter", onEnter);
+    document.addEventListener("mouseleave", onLeave);
+    document.addEventListener("mouseover", onOver, { passive: true });
+    window.addEventListener("mousedown", onDown);
 
     return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mousedown", down);
-      window.removeEventListener("mouseup", up);
-      document.removeEventListener("mouseover", handleHover);
+      document.removeEventListener("mouseenter", onEnter);
+      document.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("mouseover", onOver);
+      window.removeEventListener("mousedown", onDown);
     };
-  }, []);
+  }, [raw]);
 
-  if (typeof window !== "undefined" && window.matchMedia("(pointer: coarse)").matches) {
-    return null;
-  }
+  if (isTouch) return null;
 
-  const size = hovering ? 38 : 32;
+  const { x, y } = prefersReduced ? raw.current : smooth.current;
+  const { visible, hover, text } = state;
+
+  if (text) return null;
+
+  // Hover: bigger rasengan
+  const size = hover ? 52 : 36;
 
   return (
-    <motion.div
-      className="fixed top-0 left-0 pointer-events-none z-[9999]"
-      animate={{
-        x: pos.x - 2,   // offset so the tip (top-left) is exactly at cursor
-        y: pos.y - 2,
-        opacity: visible ? 1 : 0,
-        scale: clicking ? 0.85 : 1,
-      }}
-      transition={{
-        x: { type: "spring", stiffness: 600, damping: 30, mass: 0.2 },
-        y: { type: "spring", stiffness: 600, damping: 30, mass: 0.2 },
-        scale: { duration: 0.1 },
-        opacity: { duration: 0.15 },
-      }}
-    >
-      <KunaiSVG size={size} hovering={hovering} clicking={clicking} />
-    </motion.div>
+    <>
+      {/* Click ripple */}
+      {rippleKey > 0 && (
+        <div
+          key={rippleKey}
+          className="rs-ripple"
+          style={{ left: ripplePos.current.x, top: ripplePos.current.y }}
+        />
+      )}
+
+      {/* Rasengan SVG cursor */}
+      <div
+        style={{
+          position: "fixed",
+          left: x,
+          top: y,
+          width: size,
+          height: size,
+          transform: "translate(-50%, -50%)",
+          pointerEvents: "none",
+          zIndex: 9999,
+          opacity: visible ? 1 : 0,
+          transition: "width 0.18s ease, height 0.18s ease, opacity 0.12s",
+          filter: "drop-shadow(0 0 6px #1a90ffaa) drop-shadow(0 0 14px #0055cc55)",
+        }}
+      >
+        <RasenganSVG size={size} />
+      </div>
+    </>
   );
 }

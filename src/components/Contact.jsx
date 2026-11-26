@@ -74,12 +74,22 @@ export default function Contact() {
         transition={{ duration: 0.5 }}
         className="text-center mb-4 relative z-10 px-4"
       >
-        <span className="font-mono text-sm text-[#00FF88] mb-2 block tracking-wider">
+        <motion.span
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.4 }}
+          className="font-mono text-sm text-[#00FF88] mb-2 block tracking-wider"
+        >
           {"// Final Chapter"}
-        </span>
-        <h2 className="font-heading text-5xl sm:text-6xl text-white tracking-wide">
+        </motion.span>
+        <motion.h2
+          initial={{ opacity: 0, y: 24, clipPath: "inset(100% 0 0 0)" }}
+          animate={isInView ? { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" } : {}}
+          transition={{ duration: 0.55, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          className="font-heading text-5xl sm:text-6xl text-white tracking-wide"
+        >
           Send a Jutsu
-        </h2>
+        </motion.h2>
       </motion.div>
 
       <motion.div
@@ -164,7 +174,11 @@ export default function Contact() {
             {/* Form */}
             <form onSubmit={handleSubmit} className="space-y-3.5">
               <div className="grid grid-cols-2 gap-3.5">
-                <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.6 }}
+                >
                   <label className="block font-mono text-[8px] text-gray-600 uppercase tracking-widest mb-1">Name</label>
                   <input
                     type="text"
@@ -174,8 +188,12 @@ export default function Contact() {
                     className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/[0.08] text-white font-body placeholder-gray-700 focus:border-[#FF6B00]/50 focus:outline-none focus:ring-1 focus:ring-[#FF6B00]/20 transition-colors text-sm"
                     placeholder="Your name"
                   />
-                </div>
-                <div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.68 }}
+                >
                   <label className="block font-mono text-[8px] text-gray-600 uppercase tracking-widest mb-1">Email</label>
                   <input
                     type="email"
@@ -185,9 +203,13 @@ export default function Contact() {
                     className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/[0.08] text-white font-body placeholder-gray-700 focus:border-[#FF6B00]/50 focus:outline-none focus:ring-1 focus:ring-[#FF6B00]/20 transition-colors text-sm"
                     placeholder="your@email.com"
                   />
-                </div>
+                </motion.div>
               </div>
-              <div>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.76 }}
+              >
                 <label className="block font-mono text-[8px] text-gray-600 uppercase tracking-widest mb-1">Message</label>
                 <textarea
                   value={form.message}
@@ -197,7 +219,12 @@ export default function Contact() {
                   className="w-full px-3.5 py-2.5 rounded-lg bg-white/[0.03] border border-white/[0.08] text-white font-body placeholder-gray-700 focus:border-[#FF6B00]/50 focus:outline-none focus:ring-1 focus:ring-[#FF6B00]/20 transition-colors text-sm resize-none"
                   placeholder="Tell me about your mission..."
                 />
-              </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.84 }}
+              >
               <motion.button
                 type="submit"
                 disabled={loading}
@@ -215,6 +242,7 @@ export default function Contact() {
                   </>
                 )}
               </motion.button>
+              </motion.div>
             </form>
           </motion.div>
         </div>

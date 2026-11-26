@@ -58,11 +58,17 @@ export default function Certificates() {
           <span className="font-mono text-sm text-[#00FF88] mb-2 block tracking-wider">
             {"// Chapter 06"}
           </span>
-          <h2 className="font-heading text-5xl sm:text-6xl lg:text-7xl text-white tracking-wider">
+          <motion.h2
+            initial={{ opacity: 0, y: 24, clipPath: "inset(100% 0 0 0)" }}
+            animate={isInView ? { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" } : {}}
+            transition={{ duration: 0.55, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="font-heading text-5xl sm:text-6xl lg:text-7xl text-white tracking-wider"
+          >
             RANK SCROLLS
-          </h2>
+          </motion.h2>
           <motion.div
             initial={{ scaleX: 0 }}
+
             animate={isInView ? { scaleX: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
             className="h-[2px] w-32 mx-auto mt-3 bg-gradient-to-r from-transparent via-[#FF6B00] to-transparent"

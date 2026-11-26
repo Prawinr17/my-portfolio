@@ -1,5 +1,5 @@
-import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
-import { useRef, useEffect } from "react";
+import { motion, useInView, useMotionValue, useTransform, animate, useScroll, useSpring } from "framer-motion";
+import { useRef, useEffect, useCallback } from "react";
 import { MapPin, Zap, Target, Clock, Code2 } from "lucide-react";
 
 function Counter({ target, suffix = "", isInView }) {
@@ -24,18 +24,53 @@ const stats = [
 ];
 
 const profileItems = [
-  { icon: Zap, label: "Rank", value: "Senior Frontend Developer" },
+  { icon: Zap, label: "Rank", value: "Software Engineer" },
   { icon: MapPin, label: "Village", value: "Bengaluru, India" },
   { icon: Clock, label: "Experience", value: "3+ Years of Battle" },
   { icon: Target, label: "Specialty", value: "React.js · TypeScript · Redux" },
   { icon: Code2, label: "Current Mission", value: "Svavvashaa Technologies" },
 ];
 
+function TiltCard({ children, className, style }) {
+  const cardRef = useRef(null);
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const rx = useSpring(rotateX, { stiffness: 200, damping: 20 });
+  const ry = useSpring(rotateY, { stiffness: 200, damping: 20 });
+
+  const handleMove = useCallback((e) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    rotateX.set(-ny * 6);
+    rotateY.set(nx * 6);
+  }, [rotateX, rotateY]);
+
+  const handleLeave = useCallback(() => { rotateX.set(0); rotateY.set(0); }, [rotateX, rotateY]);
+
+  return (
+    <motion.div
+      ref={cardRef}
+      style={{ rotateX: rx, rotateY: ry, transformPerspective: 800, ...style }}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
 export default function About() {
   const ref = useRef(null);
   const introRef = useRef(null);
+  const bgRef = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
   const introInView = useInView(introRef, { once: true, amount: 0.4 });
+
+  const { scrollYProgress } = useScroll({ target: bgRef, offset: ["start end", "end start"] });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   return (
     <section
@@ -44,20 +79,24 @@ export default function About() {
       ref={ref}
     >
       {/* ===== KONOHA BG IMAGE — Valley of the End ===== */}
-      <div ref={introRef} className="relative w-full h-[50vh] sm:h-[55vh] lg:h-[60vh] overflow-hidden">
-        {/* Image */}
-        <motion.div
-          initial={{ scale: 1.1 }}
-          animate={introInView ? { scale: 1 } : {}}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="absolute inset-0"
-        >
-          <img
-            src="/konaha image.png"
-            alt="Praveen R — About section background, Valley of the End scene"
-            className="w-full h-full object-cover object-center"
-          />
-        </motion.div>
+      <div ref={introRef} className="relative w-full h-[62vh] sm:h-[68vh] lg:h-[72vh] overflow-hidden">
+        {/* Image with parallax */}
+        <div ref={bgRef} className="absolute inset-0 overflow-hidden">
+          <motion.div
+            initial={{ scale: 1.15 }}
+            animate={introInView ? { scale: 1.08 } : {}}
+            transition={{ duration: 1.6, ease: "easeOut" }}
+            style={{ y: bgY }}
+            className="absolute inset-[-8%]"
+          >
+            <img
+              src="/konaha image.png"
+              alt="Praveen R — About section background, Valley of the End scene"
+              className="w-full h-full object-cover"
+              style={{ objectPosition: "center 10%" }}
+            />
+          </motion.div>
+        </div>
 
         {/* Dark overlay gradient — bottom fade into content */}
         <div
@@ -89,9 +128,14 @@ export default function About() {
             <span className="font-mono text-sm text-[#00FF88] mb-2 block tracking-wider">
               {"// Chapter 01"}
             </span>
-            <h2 className="font-heading text-6xl sm:text-7xl lg:text-8xl text-white tracking-wider">
+            <motion.h2
+              initial={{ opacity: 0, y: 24, clipPath: "inset(100% 0 0 0)" }}
+              animate={introInView ? { opacity: 1, y: 0, clipPath: "inset(0% 0 0 0)" } : {}}
+              transition={{ duration: 0.55, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="font-heading text-6xl sm:text-7xl lg:text-8xl text-white tracking-wider"
+            >
               MY STORY
-            </h2>
+            </motion.h2>
             <motion.div
               initial={{ scaleX: 0 }}
               animate={introInView ? { scaleX: 1 } : {}}
@@ -131,8 +175,8 @@ export default function About() {
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="rounded-2xl bg-[#0d0d14]/90 backdrop-blur-xl border border-[#FF6B00]/15 overflow-hidden mb-8"
           >
+          <TiltCard className="rounded-2xl bg-[#0d0d14]/90 backdrop-blur-xl border border-[#FF6B00]/15 overflow-hidden mb-8">
             {/* Card header bar */}
             <div className="px-6 py-3 border-b border-[#FF6B00]/10 bg-[#FF6B00]/5 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -176,6 +220,7 @@ export default function About() {
                 ))}
               </div>
             </div>
+          </TiltCard>
           </motion.div>
 
           {/* Bio + Stats row */}
@@ -188,16 +233,16 @@ export default function About() {
               className="lg:col-span-8 space-y-4"
             >
               <p className="font-body text-lg text-gray-200 leading-relaxed">
-                I'm a <span className="text-[#FF6B00] font-bold">Senior Frontend Developer</span> with
-                3+ years of experience building high-performance, real-time web applications.
-                I specialize in crafting pixel-perfect UIs with <span className="text-[#FF6B00] font-semibold">React.js</span> and
-                modern JavaScript ecosystems.
+                I'm a <span className="text-[#FF6B00] font-bold">Software Engineer</span> with
+                3+ years of experience in web application development, primarily focused on{" "}
+                <span className="text-[#FF6B00] font-semibold">React.js, Next.js and TypeScript</span>.
               </p>
               <p className="font-body text-base text-gray-400 leading-relaxed">
-                At <span className="text-white font-semibold">Svavvashaa Technologies</span>, I build
-                scalable React and TypeScript applications with Claude AI as an embedded pair-programmer —
-                after architecting real-time freight & logistics platforms at Creators Infotek. My ninja way?
-                Never stop learning, never stop building.
+                At <span className="text-white font-semibold">Svavvashaa Technologies</span>, I develop
+                frontend and full-stack applications, integrating REST APIs and contributing to backend
+                development using <span className="text-white font-semibold">.NET and ASP.NET</span>.
+                I also handle company website development, technical SEO and Generative Engine Optimization (GEO).
+                My ninja way? Never stop learning, never stop building.
               </p>
 
               {/* Quote */}
@@ -224,7 +269,7 @@ export default function About() {
                   transition={{ delay: 0.7 + i * 0.08 }}
                   className="p-4 rounded-xl bg-[#0d0d14]/80 border border-white/[0.06] hover:border-[#FF6B00]/25 transition-colors text-center"
                 >
-                  <div className="font-heading text-3xl text-[#FF6B00]">
+                  <div className={`font-heading text-3xl text-[#FF6B00] ${isInView ? "counter-flash" : ""}`}>
                     <Counter target={stat.value} suffix={stat.suffix} isInView={isInView} />
                   </div>
                   <div className="font-body text-xs text-gray-400 mt-1 uppercase tracking-wider">

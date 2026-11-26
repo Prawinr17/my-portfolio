@@ -1,7 +1,45 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
+import { useRef, useCallback } from "react";
 import { ArrowDown, ArrowRight, Download } from "lucide-react";
 import ParticleField from "./ParticleField";
 import CharacterImage from "./CharacterImage";
+
+function MagneticBtn({ children, className, href, onClick, download, rel, ariaLabel, style }) {
+  const ref = useRef(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 300, damping: 25 });
+  const sy = useSpring(y, { stiffness: 300, damping: 25 });
+
+  const handleMove = useCallback((e) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    x.set((e.clientX - cx) * 0.3);
+    y.set((e.clientY - cy) * 0.3);
+  }, [x, y]);
+
+  const handleLeave = useCallback(() => { x.set(0); y.set(0); }, [x, y]);
+
+  return (
+    <motion.a
+      ref={ref}
+      href={href}
+      onClick={onClick}
+      download={download}
+      rel={rel}
+      aria-label={ariaLabel}
+      style={{ x: sx, y: sy, ...style }}
+      onMouseMove={handleMove}
+      onMouseLeave={handleLeave}
+      whileTap={{ scale: 0.95 }}
+      className={className}
+    >
+      {children}
+    </motion.a>
+  );
+}
 
 export default function Hero() {
   return (
@@ -21,7 +59,7 @@ export default function Hero() {
       />
 
       {/* ===== SEAL SYMBOL + NARUTO IMAGE ===== */}
-      <div className="absolute right-[2%] md:right-[5%] lg:right-[10%] xl:right-[15%] 2xl:right-[18%] top-[55%] -translate-y-1/2 z-[1] hidden md:flex items-center justify-center">
+      <div className="absolute right-0 md:right-[2%] lg:right-[4%] xl:right-[8%] 2xl:right-[12%] top-[55%] -translate-y-1/2 z-[1] hidden md:flex items-center justify-center">
         {/* Eight Trigrams Seal — spinning behind Naruto */}
         <motion.div
           animate={{ rotate: 360 }}
@@ -71,7 +109,7 @@ export default function Hero() {
             src="/Naruto Hokage.png"
             alt="Praveen R — Frontend Developer hero illustration, Naruto Hokage theme"
             color="#FF6B00"
-            className="h-[55vh] md:h-[60vh] lg:h-[70vh] xl:h-[78vh] 2xl:h-[82vh] max-h-[680px] w-auto"
+            className="h-[55vh] md:h-[58vh] lg:h-[65vh] xl:h-[74vh] 2xl:h-[80vh] max-h-[660px] w-auto"
           />
         </motion.div>
       </div>
@@ -105,10 +143,16 @@ export default function Hero() {
 
       {/* ===== Right edge vignette — fades character into black ===== */}
       <div
-        className="absolute right-0 top-0 w-[200px] h-full z-[2] pointer-events-none"
+        className="absolute right-0 top-0 w-[120px] h-full z-[2] pointer-events-none"
         style={{
-          background:
-            "linear-gradient(to left, #0a0a0a 0%, transparent 100%)",
+          background: "linear-gradient(to left, #0a0a0a 0%, transparent 100%)",
+        }}
+      />
+      {/* Left vignette — separates text from character at tight widths */}
+      <div
+        className="absolute left-0 top-0 w-[40%] md:w-0 h-full z-[2] pointer-events-none"
+        style={{
+          background: "linear-gradient(to right, #0a0a0a 60%, transparent 100%)",
         }}
       />
 
@@ -122,9 +166,9 @@ export default function Hero() {
       />
 
       {/* ===== LEFT CONTENT ===== */}
-      <div className="relative z-[10] h-full flex items-center">
+      <div className="relative z-[15] h-full flex items-center pt-16 sm:pt-20">
         <div className="w-full max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
-          <div className="max-w-full md:max-w-[55%] lg:max-w-[50%] min-w-[280px]">
+          <div className="max-w-full md:max-w-[50%] lg:max-w-[46%] xl:max-w-[44%] min-w-[280px]">
             {/* Available badge */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -138,24 +182,33 @@ export default function Hero() {
               </span>
             </motion.div>
 
-            {/* Big name */}
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="font-heading text-7xl sm:text-8xl lg:text-[8rem] leading-[0.9] tracking-wider text-white"
-            >
-              PRAVEEN R
-            </motion.h1>
+            {/* Big name — per-letter stagger reveal */}
+            <h1 className="font-heading text-7xl sm:text-8xl lg:text-[8rem] leading-[0.9] tracking-wider text-white overflow-hidden">
+              {"PRAVEEN R".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 60, rotateX: -40 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.1 + i * 0.045,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  style={{ display: "inline-block", whiteSpace: char === " " ? "pre" : "normal" }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+            </h1>
 
-            {/* Subheading */}
+            {/* Subheading — shimmer reveal */}
             <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
-              className="font-heading text-3xl sm:text-4xl lg:text-5xl tracking-wider text-[#FF6B00] mt-2"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+              className="font-heading text-3xl sm:text-4xl lg:text-5xl tracking-wider mt-2 shimmer-text"
             >
-              Frontend Developer
+              Software Engineer
             </motion.h2>
 
             {/* Body text */}
@@ -165,9 +218,10 @@ export default function Hero() {
               transition={{ delay: 0.55 }}
               className="font-body text-base text-gray-400 mt-5 leading-relaxed max-w-md"
             >
-              3+ years building high-performance React apps at Svavvashaa
-              Technologies, Bengaluru. Specializing in real-time platforms,
-              scalable UI systems, and pixel-perfect interfaces.
+              Software Engineer with 3+ years of experience in web application
+              development, primarily focused on React.js, Next.js and TypeScript.
+              Experienced in full-stack development using .NET and ASP.NET, technical
+              SEO, and AI-assisted development.
             </motion.p>
 
             {/* Two buttons */}
@@ -177,55 +231,42 @@ export default function Hero() {
               transition={{ delay: 0.75 }}
               className="flex flex-wrap gap-4 mt-7"
             >
-              <motion.a
+              <MagneticBtn
                 href="#projects"
                 onClick={(e) => {
                   e.preventDefault();
-                  document
-                    .getElementById("projects")
-                    ?.scrollIntoView({ behavior: "smooth" });
+                  document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                whileHover={{
-                  scale: 1.03,
-                  boxShadow: "0 0 25px #FF6B0044",
-                }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#FF6B00] text-white font-body font-bold text-sm uppercase tracking-widest rounded-lg cursor-pointer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 bg-[#FF6B00] text-white font-body font-bold text-sm uppercase tracking-widest rounded-lg cursor-pointer transition-shadow hover:shadow-[0_0_28px_#FF6B0066]"
               >
                 View My Work
                 <ArrowRight className="w-4 h-4" />
-              </motion.a>
+              </MagneticBtn>
 
-              <motion.a
+              <MagneticBtn
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
-                  document
-                    .getElementById("contact")
-                    ?.scrollIntoView({ behavior: "smooth" });
+                  document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
                 className="inline-flex items-center gap-2 px-7 py-3.5 border border-[#FF6B00]/40 text-[#FF6B00] font-body font-bold text-sm uppercase tracking-widest rounded-lg hover:bg-[#FF6B00]/10 transition-colors cursor-pointer"
               >
                 Get In Touch
-              </motion.a>
+              </MagneticBtn>
 
-              <motion.a
-                href="/Praveen_R_Resume.pdf"
+              <MagneticBtn
+                href="/Praveen_Resume.pdf"
                 download="Praveen_R_Resume.pdf"
-                aria-label="Download Praveen R resume PDF"
-                rel="noopener"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
+                rel="noopener noreferrer"
+                ariaLabel="Download Resume"
                 className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/15 text-gray-300 font-body font-bold text-sm uppercase tracking-widest rounded-lg hover:bg-white/5 hover:text-white transition-colors cursor-pointer"
               >
                 <Download className="w-4 h-4" />
                 Resume
-              </motion.a>
+              </MagneticBtn>
             </motion.div>
 
-            {/* Naruto quote */}
+            {/* Quote */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -233,9 +274,9 @@ export default function Hero() {
               className="mt-7 pl-4 border-l-2 border-[#FF6B00]/40"
             >
               <p className="font-body text-sm text-gray-400 italic leading-relaxed">
-                "I'm not gonna run away. I never go back on my word. That's my nindo — my ninja way!"
+                "The only thing that can make my dream come true is a never-give-up spirit."
               </p>
-              <span className="font-mono text-xs text-[#FF6B00] mt-1 block">— Naruto Uzumaki</span>
+              <span className="font-mono text-xs text-[#FF6B00] mt-1 block">— Minato Namikaze · Fourth Hokage</span>
             </motion.div>
           </div>
         </div>

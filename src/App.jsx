@@ -35,16 +35,21 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <QuoteDivider japanese={quotes[0].japanese} english={quotes[0].english} character={quotes[0].character} characterRole={quotes[0].characterRole} image="/jiriya.png" />
         <About />
-        <QuoteDivider text={quotes[0].text} author={quotes[0].author} />
+        <QuoteDivider japanese={quotes[1].japanese} english={quotes[1].english} character={quotes[1].character} characterRole={quotes[1].characterRole} image="/Naruto.png" />
         <Skills />
-        <QuoteDivider text={quotes[1].text} author={quotes[1].author} />
+        <QuoteDivider japanese={quotes[2].japanese} english={quotes[2].english} character={quotes[2].character} characterRole={quotes[2].characterRole} image="/itachi.png" />
         <Experience />
-        <QuoteDivider text={quotes[2].text} author={quotes[2].author} />
+        <QuoteDivider japanese={quotes[3].japanese} english={quotes[3].english} character={quotes[3].character} characterRole={quotes[3].characterRole} image="/obito.png" />
         <Projects />
+        <QuoteDivider japanese={quotes[5].japanese} english={quotes[5].english} character={quotes[5].character} characterRole={quotes[5].characterRole} image="/lee.png" />
         <Education />
+        <QuoteDivider japanese={quotes[4].japanese} english={quotes[4].english} character={quotes[4].character} characterRole={quotes[4].characterRole} image="/pain.png" />
         <Certificates />
+        <QuoteDivider japanese={quotes[6].japanese} english={quotes[6].english} character={quotes[6].character} characterRole={quotes[6].characterRole} image="/madara.png" />
         <Contact />
+        <QuoteDivider japanese={quotes[7].japanese} english={quotes[7].english} character={quotes[7].character} characterRole={quotes[7].characterRole} image="/kakashi.png" />
       </main>
       <Footer />
     </>
